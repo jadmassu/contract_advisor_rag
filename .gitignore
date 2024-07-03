@@ -1,2 +1,16 @@
 .env
 data/
+
+# frontend
+frontend/node_modules
+/frontend/.next/
+/frontend/out/
+
+
+#backend
+.venv/
+
+__pycache__/
+
+backend/chroma/
+notbook/chroma/
