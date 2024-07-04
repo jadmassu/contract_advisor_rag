@@ -1,3 +1,13 @@
-fastapi
+Flask
 python-dotenv
 python-docx
+chromadb
+langchain
+openai
+langchain-community
+pypdf
+langchain-openai
+langchain-chroma
+ragas
+ragatouille
+cohere

@@ -22,8 +22,24 @@ class FileProcessor:
                 raise RuntimeError("No text loaded. Please load a File first.")
 
             text_splitter = RecursiveCharacterTextSplitter(
+                # Set a really small chunk size, just to show.
+                separators=[
+                    "\n\n",
+                    "\n",
+                    " ",
+                    ".",
+                    ",",
+                    "\u200b",  # Zero-width space
+                    "\uff0c",  # Fullwidth comma
+                    "\u3001",  # Ideographic comma
+                    "\uff0e",  # Fullwidth full stop
+                    "\u3002",  # Ideographic full stop
+                    "",
+                ],
                 chunk_size=chunk_size,
-                chunk_overlap=chunk_overlap
+                chunk_overlap=chunk_overlap,
+                length_function=len,
+                is_separator_regex=False,
             )
 
             documents = text_splitter.split_documents(self.loaded_text)
@@ -31,13 +47,3 @@ class FileProcessor:
         except Exception as e:
             raise RuntimeError(f"An error occurred while splitting the File: {e}")
 
-    def extract_text_from_pages(self, pdf_reader):
-        try:
-            extracted_text = ""
-            for i, page in enumerate(pdf_reader.pages):
-                text = page.extract_text()
-                if text:
-                    extracted_text += text
-            return extracted_text
-        except Exception as e:
-            raise RuntimeError(f"An error occurred while extracting text from pages: {e}")

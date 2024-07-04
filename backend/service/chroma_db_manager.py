@@ -4,7 +4,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
 import chromadb
 class ChromaDBManager:
-    def __init__(self, persist_directory='./data',):
+    def __init__(self, persist_directory='../../data',):
         self.persist_directory = persist_directory
         self.db = None
    
