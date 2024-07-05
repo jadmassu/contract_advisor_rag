@@ -11,3 +11,4 @@ langchain-chroma
 ragas
 ragatouille
 cohere
+pyautogen

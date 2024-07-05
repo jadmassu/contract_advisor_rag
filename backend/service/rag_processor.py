@@ -3,13 +3,17 @@ from langchain_core.runnables import RunnablePassthrough
 from operator import itemgetter
 
 from backend.service.query_analysis import QueryAnalyzer
-
+from langchain.retrievers.contextual_compression import ContextualCompressionRetriever
+from langchain_cohere import CohereRerank
+from langchain_community.llms import Cohere
+from langchain.chains import RetrievalQA
 class RAGProcessor:
     def __init__(self,  llm):
    
         self.llm = llm
         self.rag = None
         self.rag_chain = None
+        self.reRank = None
 
     def create_rag(self,vector_db):
         try:
@@ -60,14 +64,29 @@ class RAGProcessor:
             return  self.rag_chain
         except Exception as e:
             raise RuntimeError(f"An error occurred while processing RAG chain: {e}")
+    def reRank(self):
+        try:
+            if self.rag_chain is None:
+                raise RuntimeError("RAG chain is not initialized. Please process RAG chain first.")
+           
+            compressor = CohereRerank()
+            compression_retriever = ContextualCompressionRetriever(
+                base_compressor=compressor, base_retriever=self.rag_chain
+            )
+            self.reRank = RetrievalQA.from_chain_type(
+            llm=Cohere(temperature=0), retriever=compression_retriever
+            )
+            return self.reRank 
+        except Exception as e:
+            raise RuntimeError(f"An error occurred while reRank: {e}")
 
     def invoker(self, question):
         try:
-            if self.rag_chain is None:
+            if self.reRank is None:
                 raise RuntimeError("RAG chain is not initialized. Please process RAG chain first.")
             query_analyzer = QueryAnalyzer()
             result = query_analyzer.analyze_query(question)
             
-            return self.rag_chain.invoke({"question": question,query_analyzer: result })
+            return self.reRank.invoke({"question": question,query_analyzer: result })
         except Exception as e:
             raise RuntimeError(f"An error occurred while invoking the chain: {e}")

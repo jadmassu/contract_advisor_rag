@@ -4,7 +4,8 @@ from langchain_openai import ChatOpenAI
 from service.file_processor import FileProcessor
 from service.chroma_db_manager import ChromaDBManager
 from service.rag_processor import RAGProcessor
-from service.prompt_tester import evaluate
+from service.ragas import RAGTestsetEvaluator
+
 load_dotenv()
 
 class Controller:
@@ -14,6 +15,7 @@ class Controller:
         self.rag_processor = None
         self.response_prompt = None
         self.user_prompt = None
+        self.file = None
 
     def generate_prompt(self, prompt):
         try:
@@ -27,8 +29,8 @@ class Controller:
 
     def init_process(self):
         try:
-            file = FileProcessor(self.file_path)
-            file.load_file()
+            self.file = FileProcessor(self.file_path)
+            self.file.load_file()
             sp = file.split_file()
        
             chroma = ChromaDBManager()
@@ -42,9 +44,7 @@ class Controller:
 
     def evaluate(self):
         try:
-            evaluation = evaluate(self.prompt, self.user_prompt, self.file_path)
-            print(evaluation)
+            eval = RAGTestsetEvaluator()
+            eval.evaluate(self.file)
         except Exception as e:
             raise RuntimeError(f"error: {e}")
-
-
