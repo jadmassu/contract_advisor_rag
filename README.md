@@ -1,5 +1,10 @@
 # Contract Advisor RAG: Towards Building A High-Precision Legal Expert LLM APP
 
+
+## Project Overview
+
+The primary goal of this project is to build, evaluate, and improve a Retrieval-Augmented Generation (RAG) system for Contract Q&A. This system will enable users to interact with contracts by asking questions and receiving precise, relevant answers. The ultimate aim is to enhance the capabilities of our contract assistant, contributing to our vision of creating a fully autonomous contract bot.
+
 ## Table of Contents
 
 - [Project Overview](#project-overview)
@@ -9,9 +14,6 @@
 - [Project Structure](#project-structure)
 - [License](#license)
 
-## Project Overview
-
-The primary goal of this project is to build, evaluate, and improve a Retrieval-Augmented Generation (RAG) system for Contract Q&A. This system will enable users to interact with contracts by asking questions and receiving precise, relevant answers. The ultimate aim is to enhance the capabilities of our contract assistant, contributing to our vision of creating a fully autonomous contract bot.
 
 ## Tech Stack
 
