@@ -5,8 +5,8 @@
 - [Project Overview](#project-overview)
 - [Tech Stack](#tech-stack)
 - [Setup Instructions](#setup-instructions)
-- [Usage](#usage)
 - [Project Structure](#project-structure)
+- [Key Features](#key-features) 
 - [License](#license)
 
 
@@ -32,8 +32,8 @@ The primary goal of this project is to build, evaluate, and improve a Retrieval-
 
 1. **Clone the Repository**
    ```sh
-   git clone git@github.com:jadmassu/PromptBuilder-for-RAG.git
-   cd your-repository
+   git clone git@github.com:jadmassu/contract_advisor_rag.git
+   cd contract_advisor_rag
    ```
 2. **Set Up Virtual Environment**
 
@@ -80,7 +80,7 @@ npm run dev
 
 [http://localhost:3000](http://localhost:3000)
 
-## Code Structure
+## Project Structure
 
     ├── backend
     │   ├── main.py               # API entry point
@@ -96,6 +96,14 @@ npm run dev
     ├── requirements.txt          # Python dependencies
     ├── README.md                 # Project documentation
     └── ...
+
+## Key Features
+
+* Pre-Retrieval Optimization: Efficiently load, chunk, and embed data for streamlined processing.
+* Retrieval Optimization: Implemented Expansion Query Analysis to enhance retrieval performance.
+* Post-Retrieval Optimization: Refined results using Cohere Rerank to improve output quality.
+* Ragas Framework: Evaluates Retrieval Augmented Generation (RAG) pipelines for performance assessment.
+* AutoGen Agents: Developed multi-agent system with Assistant for initialization, Worker for RAG pipeline and Ragas evaluation, and User Proxy for user interactions.
 
 ### License
 
